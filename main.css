@@ -1,0 +1,72 @@
+body {
+	background: #ccc;
+}
+
+#zone {
+	position: relative;
+	background: #fff;
+	border: solid #777 2px;
+}
+
+#zone.dbug #grids .h {
+	position: absolute;
+	background-image: repeating-linear-gradient(
+		180deg,
+		#ffffff00,
+		#ffffff00 19px,
+		#ccc 19px,
+		#ccc 20px
+    );
+}
+
+#zone.dbug #grids .v {
+	position: absolute;
+	background-image: repeating-linear-gradient(
+		90deg,
+		#ffffff00,
+		#ffffff00 19px,
+		#ccc 19px,
+		#ccc 20px
+    );
+}
+
+#worm .section {
+	z-index: 1;
+	position: absolute;
+	width: 21px;
+	height: 21px;
+	background: #b4e455;
+	margin-top: -1px;
+	margin-left: -1px;
+}
+
+#zone.dbug #worm .head.section {
+	box-shadow: inset 0 0 17px 0px #78a521;
+}
+
+.apple {
+	z-index: 1;
+	position: absolute;
+	width: 19px;
+	height: 19px;
+	box-sizing: border-box;
+	border: solid 5px #fff;
+	background: #ff4141;
+}
+
+.orange {
+	z-index: 1;
+	position: absolute;
+	width: 19px;
+	height: 19px;
+	box-sizing: border-box;
+	border: solid 5px #fff;
+	border-width: 5px;
+	background: #ffbc00;
+	animation: pulse 0.3s infinite;
+}
+
+@keyframes pulse {
+	0% { border-width: 5px }
+	100% { border-width: 2px }
+}
