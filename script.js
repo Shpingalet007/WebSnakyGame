@@ -124,6 +124,10 @@ class Worm {
 		this.sections = [];
 		this.sections[0] = [xpos, ypos];
 		
+		// Change direction on next timerstack operation.
+		// FIXME: Try to make it more simple.
+		this.pendingDirectionChange = null;
+		
 		this.spawn(this.sections[0]);
 		
 		wormgame.worm = this;
@@ -237,9 +241,11 @@ class Worm {
 	}
 	
 	changeDirection(dir) {
-		if(Math.abs(this.moveDirection - dir) == 2)
+		if(this.pendingDirectionChange) return false;
+		if(Math.abs((this.moveDirection) - dir) == 2)
 			return false;
 		
+		this.pendingDirectionChange = true;
 		this.moveDirection = dir;
 	}
 	
@@ -276,6 +282,7 @@ class Worm {
 		wormgame.worm.trailTail();
 		wormgame.worm.moveHead();
 		wormgame.worm.checkForFood();
+		wormgame.worm.pendingDirectionChange = false;
 	}
 	
 	moveHead() {
