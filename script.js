@@ -134,28 +134,29 @@ class Worm {
 		$(document).on('keydown', function(e) {
 			console.log(e);
 			
-			if(e.which == 38) {
+		});
+			if(e.which == 38 || e.which == 87) {
 				e.preventDefault();
 				
 				wormgame.worm.changeDirection(0);
 				return true;
 			}
 			
-			if(e.which == 39) {
+			if(e.which == 39 || e.which == 68) {
 				e.preventDefault();
 				
 				wormgame.worm.changeDirection(1);
 				return true;
 			}
 			
-			if(e.which == 40) {
+			if(e.which == 40 || e.which == 83) {
 				e.preventDefault();
 				
 				wormgame.worm.changeDirection(2);
 				return true;
 			}
 			
-			if(e.which == 37) {
+			if(e.which == 37 || e.which == 65) {
 				e.preventDefault();
 				
 				wormgame.worm.changeDirection(3);
