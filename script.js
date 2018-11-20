@@ -124,6 +124,10 @@ class Worm {
 		this.sections = [];
 		this.sections[0] = [xpos, ypos];
 		
+		// Change direction on next timerstack operation.
+		// FIXME: Try to make it more simple.
+		this.pendingDirectionChange = null;
+		
 		this.spawn(this.sections[0]);
 		
 		wormgame.worm = this;
@@ -134,29 +138,28 @@ class Worm {
 		$(document).on('keydown', function(e) {
 			console.log(e);
 			
-		});
-			if(e.which == 38 || e.which == 87) {
+			if(e.which == 38) {
 				e.preventDefault();
 				
 				wormgame.worm.changeDirection(0);
 				return true;
 			}
 			
-			if(e.which == 39 || e.which == 68) {
+			if(e.which == 39) {
 				e.preventDefault();
 				
 				wormgame.worm.changeDirection(1);
 				return true;
 			}
 			
-			if(e.which == 40 || e.which == 83) {
+			if(e.which == 40) {
 				e.preventDefault();
 				
 				wormgame.worm.changeDirection(2);
 				return true;
 			}
 			
-			if(e.which == 37 || e.which == 65) {
+			if(e.which == 37) {
 				e.preventDefault();
 				
 				wormgame.worm.changeDirection(3);
@@ -238,9 +241,11 @@ class Worm {
 	}
 	
 	changeDirection(dir) {
-		if(Math.abs(this.moveDirection - dir) == 2)
+		if(this.pendingDirectionChange) return false;
+		if(Math.abs((this.moveDirection) - dir) == 2)
 			return false;
 		
+		this.pendingDirectionChange = true;
 		this.moveDirection = dir;
 	}
 	
@@ -277,6 +282,7 @@ class Worm {
 		wormgame.worm.trailTail();
 		wormgame.worm.moveHead();
 		wormgame.worm.checkForFood();
+		wormgame.worm.pendingDirectionChange = false;
 	}
 	
 	moveHead() {
